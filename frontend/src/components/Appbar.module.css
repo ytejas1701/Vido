@@ -39,3 +39,20 @@
     cursor: pointer;
     fill:#111;
 }
+
+.appbar .actions .authButtons {
+    color: #007FFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.appbar .actions .authButtons span:hover {
+    cursor: pointer;
+}
+
+.appbar .actions button {
+    font-size: 1.2rem;
+}

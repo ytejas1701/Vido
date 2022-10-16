@@ -5,13 +5,15 @@ import {Outlet} from 'react-router-dom';
 import Dropdown from './Dropdown';
 import { useEffect, useRef, useState } from 'react';
 import Modal from './Modal';
+import PostVideo from './PostVideo';
 
 const CenterContent = ()=>{
-    const useOutsideAlert = (ref)=>{
+    const useOutsideAlert = (ref, type)=>{
         useEffect(()=>{
             const outsideClickHandler = (event)=>{
                 if(ref.current && !ref.current.contains(event.target)){
                     setDropdown(null);
+                    setModal(null);
                 }
             }
             document.addEventListener("mousedown", outsideClickHandler);
@@ -21,9 +23,11 @@ const CenterContent = ()=>{
     }
 
     const dropdownRef = useRef(null);
+    const modalRef = useRef(null);
     useOutsideAlert(dropdownRef);
-
+    useOutsideAlert(modalRef);
     const [dropdown, setDropdown] = useState(null);
+    const [modal, setModal] = useState(null);
 
     const showDropdownHandler = (items)=>
         setDropdown(
@@ -32,11 +36,18 @@ const CenterContent = ()=>{
             </Dropdown>
         );
 
+    const showModalHandler = (items)=>
+        setModal(
+            <Modal modalRef={modalRef}>
+                {items}
+            </Modal>
+        );
+
     return (
         <div className={styles.centerContent}>
-            <Appbar showDropdown={showDropdownHandler}/>
+            <Appbar showDropdown={showDropdownHandler} showModal={showModalHandler}/>
             {dropdown}
-            <Modal/>
+            {modal}
             <div className={styles.outlet}>
                 <Outlet/>            
             </div>

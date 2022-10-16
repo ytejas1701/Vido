@@ -7,18 +7,80 @@
 }
 
 .content {
-    height: 60vh;
-    width: 50vw;
-    background-color: aliceblue;
+    background-color: #eee;
+    height: fit-content;
+    width: 40vw;
     margin: 2rem auto;
     border-radius: 12px;
     padding: 1rem;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
 }
 
-label {
+.content form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.content label {
     font-size: 1rem;
-    margin: 0.5rem 0rem;
+    margin-top: 0.75rem;
+}
+
+.content .box {
+    width: 60%;
+    height: 180px;
+    align-self: center;
+    border-radius: 12px;
+    border: 1px solid #888;
+    background-color: #ccc;
+}
+
+.content .iconButton {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.content svg {
+    width: fit-content;
+    fill: #eeeeee;
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+.content .iconButton:hover {
+    cursor: pointer;
+}
+
+.content textarea,
+.content input {
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid #888;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+.content textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.content span {
+    align-self: center;
+    color: #007FFF;
+    border: 1px solid #007FFF;
+    padding: 0.25rem;
+    border-radius: 6px;
+    margin-top: 0.25rem;
+}
+
+.content span:hover {
+    cursor: pointer;
+}
+
+.content button {
+    font-size: 1.2rem;
+    align-self: flex-end;
+    margin-top: 0.5rem;
 }
