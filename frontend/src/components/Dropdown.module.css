@@ -1,0 +1,82 @@
+.dropdown {
+    width: fit-content;
+    height: fit-content;
+    background-color: #fff;
+    border: 1px solid #888;
+    border-radius: 6px;
+    position: fixed;
+    right: 0;
+    top: 50px;
+    padding: 0.25rem;
+    padding-bottom: 0rem;
+}
+
+.dropdown .item {
+    padding: 0.5rem;
+    font-size: 1rem;
+    display: flex;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 6px;
+    border-bottom: 1px solid #ccc;
+    color: #444;
+    overflow: hidden;
+}
+
+.dropdown .item:hover {
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.dropdown .item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown .item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.dropdown .item svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: #444;
+}
+
+.dropdown .item .username {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.dropdown .item .heading {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 1rem;
+    color: #333;
+}
+
+.dropdown .item .heading svg {
+    height: 0.8rem;
+    width: 0.8rem;
+    border-radius: 6px;
+    padding: 0.1rem;
+    fill: #888;
+}
+
+.dropdown .item .heading svg:hover {
+    background-color: #888;
+    fill: #fff;
+}
+
+.dropdown .item .subheading {
+    font-size: 0.8rem;
+    width: 240px;
+    color: #666;
+    word-wrap: break-word;
+}

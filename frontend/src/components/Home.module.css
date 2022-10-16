@@ -1,0 +1,11 @@
+.home {
+    display: flex;
+    flex-direction: column;
+}
+
+.home .videos {
+    display: grid;
+    gap: 2rem 1.5rem;
+    grid-template-columns: 22vw 22vw 22vw 22vw;
+    margin: 0rem auto;
+}

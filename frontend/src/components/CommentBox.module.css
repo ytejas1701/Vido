@@ -1,0 +1,69 @@
+.commentBox {
+    height: fit-content;
+    width: auto;
+    margin: 2rem 1rem;
+    padding: 1rem;
+    border-top: 1px solid #888;
+    border-bottom: 1px solid #888;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.commentBox .heading {
+    color: #888;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.commentBox .heading svg {
+    fill: #888;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.commentBox .heading svg:hover {
+    cursor: pointer;
+    fill: #333;
+}
+
+.commentBox .addComment {
+    margin-top: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0rem 1rem;
+    gap: 0.5rem;
+    font-family: Arial;
+    display: flex;
+    flex-direction: column;
+}
+
+.commentBox .addComment textarea{
+    resize: vertical;    
+    height: 100px;
+    padding: 1rem;
+    box-sizing: border-box;
+    font-family: arial;
+    background-color: transparent;
+    border: 1px solid #888;
+    border-radius: 6px;
+}
+
+.commentBox .addComment textarea:focus{
+    outline: none;
+    border-color: #333;
+}
+
+.commentBox .addComment button{
+    width: fit-content;
+    align-self: flex-end;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    background-color: #007FFF;
+    color:#eee;
+    padding: 0.5rem 1rem;
+}
+
+.commentBox .addComment button:hover {
+    cursor: pointer;
+}

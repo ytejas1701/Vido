@@ -1,0 +1,41 @@
+.appbar {
+    width: 100%;
+    height: fit-content;
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0.25rem 1.5rem;
+}
+
+.appbar .logo {
+    background-color:#702963;
+    background-image: linear-gradient(-45deg,#c31432, #240b36);
+    height: fit-content;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    color: #eee;
+    font-size: 1.5rem;
+    font-family: monospace;
+}
+
+.appbar .actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.appbar .actions svg {
+    width: 1.8rem;
+    height: 1.8rem;
+    fill: #444;
+}
+
+.appbar .actions svg:hover {
+    cursor: pointer;
+    fill:#111;
+}

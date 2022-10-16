@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  font-family: Calibri;
+  background-color: rgb(244, 244, 244);
+  color: #333;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a,
+a:hover,
+a:visited {
+  text-decoration: none;
+}
