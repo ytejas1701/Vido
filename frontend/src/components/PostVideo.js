@@ -1,4 +1,4 @@
-import styles from './Modal.module.css';
+import styles from '../UI/Modal.module.css';
 
 const PostVideo = ()=>{
     return (

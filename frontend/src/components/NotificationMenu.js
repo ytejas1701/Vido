@@ -1,4 +1,4 @@
-import styles from './Dropdown.module.css';
+import styles from '../UI/Dropdown.module.css';
 
 const NotificationMenu = ()=>{
     return (

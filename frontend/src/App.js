@@ -1,14 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
-import CenterContent from './components/CenterContent';
-import Home from './components/Home';
-import Watch from './components/Watch';
+import CenterContent from './UI/CenterContent';
+import Home from './pages/Home';
+import Watch from './pages/Watch';
 
 function App() {
   return (
     <Routes>
       <Route path='/' element={<CenterContent/>}>
         <Route index element={<Home/>}/>
-        <Route path='/watch' element={<Watch/>}/>
+        <Route path='/watch/:id' element={<Watch/>}/>
       </Route>
     </Routes>
   );

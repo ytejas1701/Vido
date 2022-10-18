@@ -2,10 +2,9 @@ import Appbar from './Appbar';
 import styles from'./CenterContent.module.css';
 
 import {Outlet} from 'react-router-dom';
-import Dropdown from './Dropdown';
+import Dropdown from '../UI/Dropdown';
 import { useEffect, useRef, useState } from 'react';
 import Modal from './Modal';
-import PostVideo from './PostVideo';
 
 const CenterContent = ()=>{
     const useOutsideAlert = (ref, type)=>{

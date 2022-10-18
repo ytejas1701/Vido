@@ -1,4 +1,4 @@
-import styles from './Dropdown.module.css';
+import styles from '../UI/Dropdown.module.css';
 import image from '../assets/proj1.png';
 
 const UserMenu = ()=>{

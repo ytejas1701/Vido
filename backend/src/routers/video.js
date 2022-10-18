@@ -8,14 +8,13 @@ const videoRouter = new express.Router();
 //read Video by id
 videoRouter.get(
     '/video/:id',
-    auth,
     async({ params }, res)=>{
         try{    
             const video = await Video.findOne({
                 _id: params.id,
             });
-            if(!Video){throw new Error();}
-            res.send(Video);
+            if(!video){throw new Error();}
+            res.send(video);
         }catch(error){
             res.status(400).send(error);
         }
@@ -25,7 +24,6 @@ videoRouter.get(
 //read all Videos of a User
 videoRouter.get(
     '/user/:id/video',
-    auth,
     async({ params }, res)=>{
         try{    
             const videos = await Video.find({
@@ -40,7 +38,6 @@ videoRouter.get(
 //read all Videos
 videoRouter.get(
     '/video',
-    auth,
     async({ params }, res)=>{
         try{    
             const videos = await Video.find({ });

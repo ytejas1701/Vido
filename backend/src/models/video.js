@@ -18,6 +18,11 @@ const videoSchema = new mongoose.Schema({
         immutable: true,
         required: true,
     },
+    creatorName: {
+        type: String,
+        immutable: true,
+        required: true,
+    },
     views: {
         type: Number,
         default: 0
