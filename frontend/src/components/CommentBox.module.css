@@ -3,14 +3,14 @@
     width: auto;
     margin: 2rem 1rem;
     padding: 1rem;
-    border-top: 1px solid #888;
-    border-bottom: 1px solid #888;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
     display: inline-flex;
     flex-direction: column;
 }
 
 .commentBox .heading {
-    color: #888;
+    color: #666;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -51,7 +51,7 @@
 
 .commentBox .addComment textarea:focus{
     outline: none;
-    border-color: #333;
+    border-color: #ccc;
 }
 
 .commentBox .addComment button{
@@ -60,7 +60,7 @@
     border-radius: 6px;
     border: 1px solid transparent;
     background-color: #007FFF;
-    color:#eee;
+    color:#ddd;
     padding: 0.5rem 1rem;
 }
 

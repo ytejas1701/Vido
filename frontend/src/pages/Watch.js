@@ -6,31 +6,71 @@ import CommentBox from '../components/CommentBox';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import ReactPlayer from 'react-player/lazy';
+
 const Watch = ()=>{
-    const [isLoading, setLoading] = useState(true);
+    const [videoLoading, setVideoLoading] = useState(true);
+    const [moreVideosLoading, setMoreVideosLoading] = useState(true);
     const [currentVideo, setCurrentVideo] = useState();
+    const [isLiked, setLiked] = useState(false);
     const commentBoxRef = useRef(null);
 
     const [moreVideos, setMoreVideos] = useState([]);
 
     const {id} = useParams();
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+    const isUnauthenticated = token===''||token===null||token===undefined
+
+    const updateVideo = async (updates)=>{
+        const response = await fetch('http://localhost:8000/video/'+id, {
+            method:'PATCH',
+            headers:{
+                'Authorization': 'Bearer '+token,
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(updates)
+        });
+    }
+
+    const createNotification = async ()=>{
+        const response = await fetch('http://localhost:8000/notification/', {
+            method:'POST',
+            headers:{
+                'Authorization': 'Bearer '+token,
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                body:currentVideo.title,
+                userId:currentVideo.creatorId,
+                link:'/',
+                type:"like"
+            })
+        });
+    }
+
     useEffect(()=>{
         const initialize = async ()=>{
             try {
-                setLoading(true);
+                setVideoLoading(true);
+                setMoreVideosLoading(true);
+
                 const currentVideoResponse = await fetch('http://localhost:8000/video/' + id);
                 if(!currentVideoResponse.ok)throw new Error();
                 const currentVideoResponseObject = await currentVideoResponse.json();
+
+                setCurrentVideo(currentVideoResponseObject);
+                setLiked(currentVideoResponseObject.likedBy.includes(userId));
+                setVideoLoading(false);
+                updateVideo({views:currentVideoResponseObject.views+1});
 
                 const moreVideosResponse = await fetch('http://localhost:8000/user/'+currentVideoResponseObject.creatorId+'/video');
                 if(!moreVideosResponse.ok)throw new Error();
                 const moreVideosResponseObject = await moreVideosResponse.json();
 
-                setCurrentVideo(currentVideoResponseObject);
                 setMoreVideos(moreVideosResponseObject);
-                setLoading(false);
+                setMoreVideosLoading(false);
             } catch (error) {
-                setLoading(true);
                 console.log(error.message);
             }
         }        
@@ -40,11 +80,17 @@ const Watch = ()=>{
     return (
         <div className={styles.watch}>
             <div className={styles.mainColumn}>
-                <img src={image} className={styles.video}/>
-                {!isLoading&&<div className={styles.title}>
+                <ReactPlayer
+                    width={"100%"}
+                    height={"480px"}
+                    playing={true}
+                    controls={true}
+                    fallback={<div className={styles.loading}></div>}
+                    url='https://firebasestorage.googleapis.com/v0/b/vido-ea2da.appspot.com/o/videos%2FClouds%20-%2064759.mp4?alt=media&token=10413b15-986c-4755-9af0-dca3e5167f59'/>
+                {!videoLoading&&<div className={styles.title}>
                     {currentVideo.title}
                 </div>}
-                {!isLoading&&<div className={styles.meta}>
+                {!videoLoading&&<div className={styles.meta}>
                     <svg 
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 16 16">
@@ -53,21 +99,31 @@ const Watch = ()=>{
                     </svg>
                     <span>{currentVideo.views}</span>
                     <svg
-                        className={styles.action}
-                        onClick={()=>commentBoxRef.current.scrollIntoView({behavior:"smooth"})}
+                        className={`${styles.heart} ${isLiked?styles.liked:''}`}
+                        onClick={()=>{
+                            if(!isUnauthenticated){
+                                if(!isLiked){
+                                    updateVideo({likes:currentVideo.likes+1, likedBy:[...currentVideo.likedBy, userId]});
+                                    createNotification();
+                                    setLiked(true);
+                                    currentVideo.likes++;
+                                }else{
+                                    updateVideo({likes:currentVideo.likes-1, likedBy:currentVideo.likedBy.filter(id=>id!==userId)});
+                                    setLiked(false);
+                                    currentVideo.likes--;
+                                }
+                            }
+                        }}
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 16 16">
-                        <path d="M2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                    </svg>
-                    <span>{currentVideo.comments}</span>
-                    <svg
-                        className={styles.heart}
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                     </svg>
                     <span>{currentVideo.likes}</span>
-                    <svg 
+                    <svg
+                        onClick={()=>{
+                            updateVideo({shares:currentVideo.shares+1})
+                            currentVideo.shares++
+                        }}
                         className={styles.action}
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 16 16">
@@ -75,21 +131,20 @@ const Watch = ()=>{
                     </svg>
                     <span>{currentVideo.shares}</span>
                 </div>}
-                {!isLoading&&<div className={styles.description}>
+                {!videoLoading&&<div className={styles.description}>
                     {currentVideo.description}
                 </div>}
-                {!isLoading&&
+                {!videoLoading&&
                 <div className={styles.creatorName}>
-                    <img src={image}/>
                     <div className={styles.info}>
                         <span>{currentVideo.creatorName}</span>
                         {moreVideos.length} {moreVideos.length===1?' video':'videos'}
                     </div>
                 </div>}
-                {!isLoading&&<CommentBox commentBoxRef={commentBoxRef} />}
+                <CommentBox currentVideo={currentVideo} updateVideo={updateVideo} commentBoxRef={commentBoxRef} />
             </div>
             <div className={styles.sideColumn}>
-                {!isLoading&&moreVideos
+                {!moreVideosLoading&&moreVideos
                 .filter(video=>video._id!==currentVideo._id)
                 .map(video=>
                     <VideoTile 

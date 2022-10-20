@@ -1,21 +1,36 @@
 body {
   margin: 0;
   font-family: Calibri;
-  background-color: rgb(244, 244, 244);
-  color: #333;
+  background-color: rgb(12, 12, 12);
+  color: #ddd;
 }
 
+input, textarea, select {
+  color:#888;
+}
+
+input::-webkit-file-upload-button,
 button{
   width: fit-content;
   border-radius: 6px;
   border: 1px solid transparent;
   background-color: #007FFF;
-  color:#eee;
+  color:#ddd;
   padding: 0.25rem 0.5rem;
 }
+input::-webkit-file-upload-button{
+  margin-right: 0.5rem;
+}
 
+input::-webkit-file-upload-button:hover,
 button:hover{
   cursor: pointer;
+}
+
+button:disabled{
+  cursor: not-allowed !important;
+  color:#333 !important;
+  background-color: #222 !important;
 }
 
 a,

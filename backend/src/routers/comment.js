@@ -8,7 +8,6 @@ const commentRouter = new express.Router();
 //read all Comments of a Video
 commentRouter.get(
     '/video/:id/comment',
-    auth,
     async({ params }, res)=>{
         try{    
             const comments = await Comment.find({

@@ -4,7 +4,7 @@ const Modal = ({modalRef, children})=>{
     return (
         <div className={styles.modal}>
             <div className={styles.content} ref={modalRef}>
-            {children}
+                {children}
             </div>
         </div>
     );

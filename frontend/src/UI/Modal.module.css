@@ -7,9 +7,9 @@
 }
 
 .content {
-    background-color: #eee;
+    background-color: #111;
     height: fit-content;
-    width: 40vw;
+    width: 30vw;
     margin: 2rem auto;
     border-radius: 12px;
     padding: 1rem;
@@ -23,42 +23,42 @@
 }
 
 .content label {
-    font-size: 1rem;
+    font-size: 0.8rem;
     margin-top: 0.75rem;
-}
-
-.content .box {
-    width: 60%;
-    height: 180px;
-    align-self: center;
-    border-radius: 12px;
-    border: 1px solid #888;
-    background-color: #ccc;
-}
-
-.content .iconButton {
-    font-size: 1rem;
     font-weight: bold;
+}
+
+.content label.tag {
+    color: rgb(236, 49, 17);
+    margin-top: 0rem !important;
+    margin-bottom: 0.5rem !important;
 }
 
 .content svg {
     width: fit-content;
-    fill: #eeeeee;
+    fill: #ddd;
     height: 1.2rem;
     width: 1.2rem;
-}
-
-.content .iconButton:hover {
-    cursor: pointer;
 }
 
 .content textarea,
 .content input {
     background-color: transparent;
     border-radius: 6px;
-    border: 1px solid #888;
-    font-size: 1rem;
+    border: 1px solid #333;
+    font-size: 0.9rem;
     padding: 0.5rem;
+}
+
+.content textarea.error,
+.content input.error {
+    border-color:rgb(236, 49, 17);
+}
+
+.content textarea:focus,
+.content input:focus {
+    outline: none;
+    border-color: #666;
 }
 
 .content textarea {
@@ -66,21 +66,12 @@
     resize: vertical;
 }
 
-.content span {
-    align-self: center;
-    color: #007FFF;
-    border: 1px solid #007FFF;
-    padding: 0.25rem;
-    border-radius: 6px;
-    margin-top: 0.25rem;
-}
-
-.content span:hover {
-    cursor: pointer;
-}
-
 .content button {
-    font-size: 1.2rem;
+    font-size: 1rem;
     align-self: flex-end;
     margin-top: 0.5rem;
+}
+
+input.uploadFile {
+    border: none !important;
 }

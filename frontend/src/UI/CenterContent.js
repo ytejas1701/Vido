@@ -5,9 +5,12 @@ import {Outlet} from 'react-router-dom';
 import Dropdown from '../UI/Dropdown';
 import { useEffect, useRef, useState } from 'react';
 import Modal from './Modal';
+import UserMenu from '../components/UserMenu';
+import NotificationMenu from '../components/NotificationMenu';
 
 const CenterContent = ()=>{
-    const useOutsideAlert = (ref, type)=>{
+    const token = localStorage.getItem("token");
+    const useOutsideAlert = (ref)=>{
         useEffect(()=>{
             const outsideClickHandler = (event)=>{
                 if(ref.current && !ref.current.contains(event.target)){
@@ -21,6 +24,26 @@ const CenterContent = ()=>{
         }, [ref])
     }
 
+    const [notifications, setNotifications] = useState([]);
+    useEffect(()=>{
+        const fetchNotifications = async ()=>{
+            try {
+                const response = await fetch("http://localhost:8000/notification", {
+                    method:"GET",
+                    headers:{
+                        "Authorization":"Bearer "+token,
+                    }
+                });
+                if(!response.ok) throw new Error();
+                const responseObject = await response.json();
+                setNotifications(responseObject);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchNotifications();
+    },[token]);
+
     const dropdownRef = useRef(null);
     const modalRef = useRef(null);
     useOutsideAlert(dropdownRef);
@@ -28,12 +51,18 @@ const CenterContent = ()=>{
     const [dropdown, setDropdown] = useState(null);
     const [modal, setModal] = useState(null);
 
-    const showDropdownHandler = (items)=>
-        setDropdown(
+    const showDropdownHandler = (type)=>{
+        if(type==="user") setDropdown(
             <Dropdown dropdownRef={dropdownRef}>
-                {items}
+                <UserMenu/>
             </Dropdown>
         );
+        if(type==="notification") setDropdown(
+            <Dropdown dropdownRef={dropdownRef}>
+                <NotificationMenu notifications={notifications}/>
+            </Dropdown>
+        )
+    }
 
     const showModalHandler = (items)=>
         setModal(

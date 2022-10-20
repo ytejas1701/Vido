@@ -11,7 +11,6 @@ const Home = ()=>{
                 const response = await fetch('http://localhost:8000/video');
                 if(!response.ok)throw new Error();
                 const responseObject = await response.json();
-                console.log(responseObject);
                 setVideos(responseObject);
             } catch (error) {
                 console.log(error.message);

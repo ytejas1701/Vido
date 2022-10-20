@@ -35,6 +35,10 @@ const videoSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    likedBy:[{
+        type:mongoose.Types.ObjectId,
+        ref:"User"
+    }],
     shares: {
         type: Number,
         default:0

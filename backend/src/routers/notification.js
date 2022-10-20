@@ -7,12 +7,12 @@ const notificationRouter = new express.Router();
 
 //read all Notifications of a user
 notificationRouter.get(
-    '/user/:id/notification',
+    '/notification',
     auth,
-    async({ params }, res)=>{
+    async({ params,user }, res)=>{
         try{    
             const notifications = await Notification.find({
-                userId: params.id,
+                userId: user._id,
             });
             res.send(notifications);
         }catch(error){
@@ -57,14 +57,14 @@ notificationRouter.delete(
     '/notification/:id',
     async({ params }, res)=>{
         try{
-            const notification = await Notification.delete({
+            const notification = await Notification.findOneAndDelete({
                 _id: params.id,
             });    
-            if(!notification){throw new Error();}
+            if(!notification){throw new Error("error");}
             res.status(200).send(notification);
         }catch(error){
             console.log(error);
-            res.status(400).send(error);
+            res.status(400).send(error.message);
         }
     });
 
